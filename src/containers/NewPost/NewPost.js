@@ -1,13 +1,15 @@
 import React, {Component} from 'react';
 import './NewPost.css';
 import axios from 'axios';
+import {Redirect} from "react-router";
 
 class NewPost extends Component {
 
     state= {
         title: '',
         content: '',
-        author: 'Max'
+        author: 'Max',
+        submitted: false
     }
 
     postPostHandler =()=>{
@@ -20,12 +22,20 @@ class NewPost extends Component {
             .then(response=> {
                 console.log(response);
             })
+        this.props.history.push('/post');
+        // this.setState({submitted: true})
 
     }
 
     render() {
+        let redirect;
+            if (this.state.submitted){
+                // redirects replaces the previous page from the new one; totally diff from .push and you cant go bk to previous
+                redirect = <Redirect to="/post"/>
+            }
         return (
             <div className="newPost">
+                {redirect}
                 <div className="header" style={{paddingTop: '30px'}}>
                     <h3>Add a New post</h3>
                 </div>

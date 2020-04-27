@@ -3,9 +3,12 @@ import NewPost from '../NewPost/NewPost';
 import './Blog.css';
 import Posts from "../Posts/Posts";
 import FullPost from "../FullPost/FullPost";
-import {Route, BrowserRouter as Router, Link, NavLink} from 'react-router-dom';
+import {Route, BrowserRouter as Router, Link, NavLink, Switch, Redirect} from 'react-router-dom';
 
 class Blog extends Component {
+    state ={
+        auth: true
+    }
 
     render() {
 
@@ -17,7 +20,7 @@ class Blog extends Component {
                             <li className="items">
                                 <NavLink to="/"
                                          activeStyle={{color: '#fa923f', textDecoration: 'underline'}}
-                                         activeClassName="active">Home</NavLink>
+                                         activeClassName="active">Posts</NavLink>
                             </li>
                             {/*<li className="items"><Link to={{*/}
                             {/*    pathname: '/new-post',*/}
@@ -36,10 +39,16 @@ class Blog extends Component {
                     </nav>
                 </header>
                 {/*<Router>*/}
-                <Route path="/" exact component={Posts}/>
-                <Route path="/new-post"  component={NewPost}/>
-                {/*/:id is loaded after new-post to avoid the app catching newpost as an ir route=param*/}
-                <Route path="/:id" exact component={FullPost}/>
+                <Switch>
+                    <Route path="/post" exact component={Posts}/>
+                    {/*this also handles guard authentication*/}
+                    {this.state.auth ? <Route path="/new-post"  component={NewPost}/> : null}
+                    {/*/:id is loaded after new-post to avoid the app catching newpost as an ir route=param*/}
+                    <Route path="/:id" exact component={FullPost}/>
+                    {/*redirect ensures the user is redirected to that route even tho he types localhost:3000*/}
+                    <Redirect from="/" to="/post"/>
+                </Switch>
+
                 {/*</Router>*/}
 
             </div>
