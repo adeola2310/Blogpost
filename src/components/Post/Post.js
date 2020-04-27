@@ -1,8 +1,10 @@
 import React, {Component} from 'react';
 import './Post.css';
+// import withRouter from "react-router/modules/withRouter";
 
 class Post extends Component {
     render() {
+        console.log(this.props);
         return (
             <div className="post">
                 <div className="post__Card" onClick={this.props.clicked}>
@@ -16,4 +18,5 @@ class Post extends Component {
     }
 }
 
-export default Post;
+// for wrapping HOC
+export default (Post);

@@ -30,9 +30,9 @@ class NewPost extends Component {
                     <h3>Add a New post</h3>
                 </div>
                 <form className="formSpace">
-                    <input type="text" placeholder="Add Title" value={this.state.title}/>
-                    <input type="text" placeholder="Content" value={this.state.content}/>
-                    <select className="allSelect" value={this.state.author}>
+                    <input type="text" placeholder="Add Title" value={this.state.title} onChange={(e) => this.setState({title: e.target.value})}/>
+                    <input type="text" placeholder="Content" value={this.state.content} onChange={(e)=>this.setState({content: e.target.value})}/>
+                    <select className="allSelect" value={this.state.author} onChange={(e)=>this.setState({author: e.target.value})}>
                         <option value="Max">Max</option>
                         <option value="Max">Adeola</option>
                         <option value="Max">Bayo</option>

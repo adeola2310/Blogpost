@@ -2,3 +2,22 @@
  section{
      margin: 40px;
  }
+
+ .nav-list{
+     width: 100%;
+     display: inline-flex;
+     text-align: center;
+     justify-content: center;
+ }
+ .items{
+     list-style: none;
+     margin: 10px;
+ }
+ a{
+     text-decoration: none;
+     color: black;
+ }
+/*a:hover,*/
+/*a:visited{*/
+/*    color: yellow;*/
+/*}*/
