@@ -4,6 +4,13 @@ import './Blog.css';
 import Posts from "../Posts/Posts";
 import FullPost from "../FullPost/FullPost";
 import {Route, BrowserRouter as Router, Link, NavLink, Switch, Redirect} from 'react-router-dom';
+import asyncComponent from "../../hoc/asyncComponent";
+import NotFound from "../NotFound/NotFound";
+
+
+// const AsyncNewPost = asyncComponent(()=>{
+//     return import ('../NewPost/NewPost')
+// })
 
 class Blog extends Component {
     state ={
@@ -11,7 +18,6 @@ class Blog extends Component {
     }
 
     render() {
-
         return (
             <div className="blogs">
                 <header>
@@ -43,10 +49,13 @@ class Blog extends Component {
                     <Route path="/post" exact component={Posts}/>
                     {/*this also handles guard authentication*/}
                     {this.state.auth ? <Route path="/new-post"  component={NewPost}/> : null}
+                    {/*loading routes easily with async components*/}
+                    {/*{this.state.auth ? <Route path="/new-post"  component={AsyncNewPost}/> : null}*/}
                     {/*/:id is loaded after new-post to avoid the app catching newpost as an ir route=param*/}
                     <Route path="/:id" exact component={FullPost}/>
                     {/*redirect ensures the user is redirected to that route even tho he types localhost:3000*/}
                     <Redirect from="/" to="/post"/>
+                    {/*<Route path="*" component={NotFound}/>*/}
                 </Switch>
 
                 {/*</Router>*/}
